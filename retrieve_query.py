@@ -1,8 +1,6 @@
 import io
 import urllib.request 
 
-
-
 triplets = []
 path = './'
 
@@ -13,10 +11,7 @@ def download_dataset(triplets_url):
 			urllib.request.urlretrieve(image, './test.jpg')
 			break
 		break
-
-
-
-
+		
 def dataset_loader(query):
 	f = open(query,'r+')
 	length = len(f.readlines())
@@ -36,7 +31,6 @@ def dataset_loader(query):
 				if i==3:
 					index+=1
 		return triplet_return
-
 
 
 if __name__ == '__main__':
