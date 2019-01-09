@@ -10,6 +10,7 @@ import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 from torchsummary import summary
 
+#For testing using IMG_URL
 IMG_URL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1200px-Cat03.jpg'
 response = requests.get(IMG_URL)
 img = Image.open(io.BytesIO(response.content))  # Read bytes and store as an img.
