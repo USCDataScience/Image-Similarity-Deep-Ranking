@@ -28,7 +28,7 @@ Run triplet_sampler.py and also specify arguments.
 ImageSpace is developed by the JPL-Kitware team funded through the DARPA Memex program. 
 
 ### Authors
-1. Chris Mattmann, JPL.
+1. Dr. Chris Mattmann, JPL.
 2. Purvak Lapsiya, USC.
 
 ### Current Progress:
