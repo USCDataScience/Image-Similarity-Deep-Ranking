@@ -41,3 +41,8 @@ ImageSpace is developed by the JPL-Kitware team funded through the DARPA Memex p
 - [ ] Completing deep_ranking.py to implement entire architecture and hindge loss.
 - [ ] DataLoader - Implement a dataloader to pass triplets to model.
 - [ ] distance.py - To calculate distance between embeddings of images.
+
+
+### License
+This project is licensed under the [Apache License, version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+
