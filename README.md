@@ -22,6 +22,7 @@ After downloading ```QUERY_AND_TRIPLETS.TXT``` run ```retrieve_folder.py``` in s
 
 #### triplets.txt
 Run triplet_sampler.py and also specify arguments.
+
 ``` python triplet_sampler.py --input_directory ./ --output_directory ./ --num_pos_images 10 --num_neg_images 10 ```
 
 ### Credits
