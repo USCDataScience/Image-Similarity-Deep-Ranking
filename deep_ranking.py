@@ -28,8 +28,8 @@ img = Variable(img)
 
 
 model = models.vgg16(pretrained=True)  
-# new_classifier = nn.Sequential(*list(model.classifier.children())[:-1])
-# model.classifier = new_classifier
+new_classifier = nn.Sequential(*list(model.classifier.children())[:-1])
+model.classifier = new_classifier
 print(summary(model,input_size=(3,224,224)))
 class Network(nn.Module):
     def __init__(self):
