@@ -1,18 +1,49 @@
-
+import glob
+import json
+import random
 import csv
 import os
 import re
 import argparse
 import numpy as np
-import glob
-import json
-import random
 
-#Due to unavailability of relevance scores, using a simple sampler which pair two similar images with a image of another class.
+def list_pictures(directory, ext='jpg|jpeg|bmp|png|ppm'):
+    return [os.path.join(root, f)
+            for root, _, files in os.walk(directory) for f in files
+            if re.match(r'([\w]+\.(?:' + ext + '))', f)]
 
-#get_postive_images and get_negative_images yet to be implemented
 
-def triplet_random_sampler(directory_path, output_path,num_neg_images,num_pos_images):
+def get_negative_images(all_images,image_names,num_neg_images):
+    random_numbers = np.arange(len(all_images))
+    np.random.shuffle(random_numbers)
+    if int(num_neg_images)>(len(all_images)-1):
+        num_neg_images = len(all_images)-1
+    neg_count = 0
+    negative_images = []
+    for random_number in list(random_numbers):
+        if all_images[random_number] not in image_names:
+            negative_images.append(all_images[random_number])
+            neg_count += 1
+            if neg_count>(int(num_neg_images)-1):
+                break
+    return negative_images
+
+def get_positive_images(image_name,image_names,num_pos_images):
+    random_numbers = np.arange(len(image_names))
+    np.random.shuffle(random_numbers)
+    if int(num_pos_images)>(len(image_names)-1):
+        num_pos_images = len(image_names)-1
+    pos_count = 0
+    positive_images = []
+    for random_number in list(random_numbers):
+        if image_names[random_number]!= image_name:
+            positive_images.append(image_names[random_number])
+            pos_count += 1 
+            if int(pos_count)>(int(num_pos_images)-1):
+                break
+    return positive_images
+
+def triplet_sampler(directory_path, output_path,num_neg_images,num_pos_images):
     classes = [d for d in os.listdir(directory_path) if os.path.isdir(os.path.join(directory_path, d))]
     all_images = []
     for class_ in classes:
