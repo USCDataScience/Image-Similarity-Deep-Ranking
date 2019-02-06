@@ -57,7 +57,7 @@ class Network_1(nn.Module):
         z = F.normalize(z,dim=1,p=2)
         out = torch.cat((out1, y, z), 1)
         out = F.normalize(out,dim=1,p=2)
-        return outtest = Network()
+        return out
 test1 = Network_1()
 print(summary(test1,input_size=(3,224,224)))
 
