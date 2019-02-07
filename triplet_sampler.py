@@ -6,14 +6,22 @@ import os
 import re
 import argparse
 import numpy as np
+from tqdm import tqdm
 
 def list_pictures(directory, ext='jpg|jpeg|bmp|png|ppm'):
+    '''
+    Returns path of folder/directory of every image present in directory by using simple regex expression
+    '''
     return [os.path.join(root, f)
             for root, _, files in os.walk(directory) for f in files
             if re.match(r'([\w]+\.(?:' + ext + '))', f)]
 
 
 def get_negative_images(all_images,image_names,num_neg_images):
+    '''
+    Returns randomly sampled 'n' negative images from all_images
+    '''
+    
     random_numbers = np.arange(len(all_images))
     np.random.shuffle(random_numbers)
     if int(num_neg_images)>(len(all_images)-1):
@@ -29,6 +37,9 @@ def get_negative_images(all_images,image_names,num_neg_images):
     return negative_images
 
 def get_positive_images(image_name,image_names,num_pos_images):
+    '''
+    Returns randomly sampled 'n' positive images from all_images
+    '''
     random_numbers = np.arange(len(image_names))
     np.random.shuffle(random_numbers)
     if int(num_pos_images)>(len(image_names)-1):
@@ -44,6 +55,14 @@ def get_positive_images(image_name,image_names,num_pos_images):
     return positive_images
 
 def triplet_sampler(directory_path, output_path,num_neg_images,num_pos_images):
+    '''
+    Writes Different combination of query, positive + Sampled Negative Image
+    Or
+    query, negative + Sampled Positive Image
+    This step is done to augment dataset.
+    Reference - https://github.com/akarshzingade/
+    '''
+
     classes = [d for d in os.listdir(directory_path) if os.path.isdir(os.path.join(directory_path, d))]
     all_images = []
     for class_ in classes:
@@ -51,7 +70,7 @@ def triplet_sampler(directory_path, output_path,num_neg_images,num_pos_images):
     triplets = []
     for class_ in classes:
         image_names = list_pictures(os.path.join(directory_path,class_))
-        for image_name in image_names:
+        for image_name in tqdm(image_names):
             image_names_set = set(image_names)
             query_image = image_name
             positive_images = get_positive_images(image_name,image_names,num_pos_images)
