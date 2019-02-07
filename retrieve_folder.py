@@ -2,33 +2,55 @@ import os
 import io
 import urllib
 from urllib.request import urlretrieve
+from tqdm import tqdm
 
+#global list to track triplets 
 triplets=[]
-def download_filess(triplets_url):
+
+def download_files(triplets_url):
+    
+    '''
+    Retrieves triplets given in triplets_url using urlib/urlib3 and store it in "file_dir".
+    It stores by creating separate folder for each triplet pair in file_dir.
+    '''
+    
     names = ['query','positive','negative']
     index = 0
     flag=0
     file_dir = './'
-    for triplet in triplets_url:
+    for triplet in tqdm(triplets_url):
         file_path = file_dir+str(index)
+        
+        #To check if path exists with given "file_path" name.
         if not os.path.exists(file_path):
             os.makedirs(file_path)
         else:
             print('path exists for triplet: ',index)
+        
         final_path = []
         for image,name in zip(triplet,names):
+            
+            #Some triplets are not publically available thereby try, catch.
             try:
                 urllib.request.urlretrieve(image, file_path+'/'+name+".jpg")
                 final_path.append(file_path+'/'+name+".jpg")
             except:
                 flag=1
+                
         if flag == 0:
             triplets.append(final_path)
         flag = 0
         index+=1
+        if(index%100==0 and index>=100):
+            print(index,"triplets added..")
 
 
 def dataset_loader(query):
+    
+    '''
+    Prepares data for download_files by parsing through 'query_and_triplets.txt' and storing triplet pairs as list.
+    '''
+    
     f = open(query,'r+')
     length = len(f.readlines())
 
@@ -52,5 +74,5 @@ def dataset_loader(query):
 if __name__ == "__main__":
 
     triplets_url = dataset_loader("query_and_triplets.txt")
-    #print(triplets_url[:10])
-    download_filess(triplets_url)
+    download_files(triplets_url)
+    print("Triplets downloaded!")
