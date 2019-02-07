@@ -13,6 +13,7 @@ pip3 install https://download.pytorch.org/whl/cu90/torch-1.0.0-cp36-cp36m-win_am
 pip3 install torchvision
 pip3 install skimage
 pip3 install pandas
+pip3 install tqdm
 ```
 #### Downloading Triplets
 The training of DeepRanking requires triplets images (query, positive and negative image) which can be found at [here](https://sites.google.com/site/imagesimilaritydata/download). Download ```QUERY_AND_TRIPLETS.TXT``` and store it in a folder.
@@ -28,14 +29,18 @@ Run triplet_sampler.py and also specify arguments.
 
 Triplet sampler is used here to augment dataset, since relevance score (mentioned in paper) is not publically available this technique is used. Sampler will pair two similar images (of 1 folder) with positive/negative images of another folder.
 
+#### deep_ranking.py
+deep_ranking.py models the architecture given in paper, current implementation just prints layers of P,Q,R network. Also, tripletLoss is preferred over hinge loss as it more suitable to our use case.
+
+```python deep_ranking.py```
+
 ### Current Progress:
 - [x] retrieve_folder.py - Implemented python script to retrieve triplets from query_and_triplets.txt and store it in different folders.
 - [x] folder.py - If you have downloaded entire dataset without using retrieve_folder.py and want to add images to folder use this simple script.
-- [x] deep_ranking.py - Implemented model P from paper using PyTorch. (few changes to be made)
+- [x] deep_ranking.py - Implemented model P,Q,R from paper using PyTorch along with optimizer and loss function.
 - [x] triplet_sampler.py - Implemented a simple randomized sampler to make different triplets out of existing 5033 triplets.
 
 ### Work remaining -
-- [ ] Completing deep_ranking.py to implement entire architecture and hindge loss.
 - [ ] DataLoader - Implement a dataloader to pass triplets to model.
 - [ ] distance.py - To calculate distance between embeddings of images.
 
