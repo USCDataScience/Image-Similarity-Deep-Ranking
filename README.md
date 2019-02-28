@@ -32,6 +32,9 @@ Triplet sampler is used here to augment dataset, since relevance score (mentione
 #### deep_ranking.py
 deep_ranking.py models the architecture given in paper, current implementation just prints layers of P,Q,R network. Also, tripletLoss is preferred over hinge loss as it more suitable to our use case.
 
+#### trained model 
+You can find link to download trained model [here](https://drive.google.com/file/d/1TmUKqp_TnzSP0TeAHIyTv8jG4KZeNqQP/view?usp=sharing)
+
 ```python deep_ranking.py```
 
 ### Current Progress:
