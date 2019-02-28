@@ -42,11 +42,12 @@ You can find link to download trained model [here](https://drive.google.com/file
 - [x] folder.py - If you have downloaded entire dataset without using retrieve_folder.py and want to add images to folder use this simple script.
 - [x] deep_ranking.py - Implemented model P,Q,R from paper using PyTorch along with optimizer and loss function.
 - [x] triplet_sampler.py - Implemented a simple randomized sampler to make different triplets out of existing 5033 triplets.
+- [x] DataLoader - Implement a dataloader to pass triplets to model.
+- [x] distance.py - To calculate distance between embeddings of images.
 
 ### Work remaining -
-- [ ] DataLoader - Implement a dataloader to pass triplets to model.
-- [ ] distance.py - To calculate distance between embeddings of images.
-
+- [ ] Fine tuning model to get better accuracy. 
+- [ ] Docker image for easy installation and integration with image space.
 ### Credits
 ImageSpace is developed by the JPL-Kitware team funded through the DARPA Memex program. 
 
