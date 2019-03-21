@@ -14,6 +14,8 @@ pip3 install torchvision
 pip3 install skimage
 pip3 install pandas
 pip3 install tqdm
+pip3 install tensorflow-gpu or pip3 install tensorflow
+pip3 install keras
 ```
 #### Downloading Triplets
 The training of DeepRanking requires triplets images (query, positive and negative image) which can be found at [here](https://sites.google.com/site/imagesimilaritydata/download). Download ```QUERY_AND_TRIPLETS.TXT``` and store it in a folder.
@@ -34,8 +36,10 @@ deep_ranking.py models the architecture given in paper, current implementation j
 
 #### trained model 
 You can find link to download trained model [here](https://drive.google.com/file/d/1TmUKqp_TnzSP0TeAHIyTv8jG4KZeNqQP/view?usp=sharing)
+Put both files in one directory. Provide image 1 and 2 for model to compare similarity.
 
-```python deep_ranking.py```
+```python get_distance.py --model ./deepranking-v2-150000.h5 --image1 0positive.jpg --image2 0query.jpg```
+
 
 ### Current Progress:
 - [x] retrieve_folder.py - Implemented python script to retrieve triplets from query_and_triplets.txt and store it in different folders.
@@ -43,11 +47,11 @@ You can find link to download trained model [here](https://drive.google.com/file
 - [x] deep_ranking.py - Implemented model P,Q,R from paper using PyTorch along with optimizer and loss function.
 - [x] triplet_sampler.py - Implemented a simple randomized sampler to make different triplets out of existing 5033 triplets.
 - [x] DataLoader - Implement a dataloader to pass triplets to model.
-- [x] distance.py - To calculate distance between embeddings of images.
+- [x] get_distance.py - To calculate distance between embeddings of images.
 
 ### Work remaining -
-- [ ] Fine tuning model to get better accuracy. 
 - [ ] Docker image for easy installation and integration with image space.
+
 ### Credits
 ImageSpace is developed by the JPL-Kitware team funded through the DARPA Memex program. 
 
